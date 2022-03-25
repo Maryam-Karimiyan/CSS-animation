@@ -56,7 +56,7 @@ section::before {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  z-index: 20;
+  z-index: 100;
 }
 .percent .number {
   position: absolute;
@@ -77,8 +77,36 @@ section::before {
   font-size: 30px;
 }
 svg {
-  display: none;
+  position: relative;
+  width: 150px;
+  height: 150px;
 }
+svg circle {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 10;
+  stroke: rgba(255, 255, 255, 0.05);
+  transform: translate(5px, 5px);
+  stroke-linecap: round;
+}
+
+svg circle:nth-child(2) {
+  stroke: rgb(255, 255, 255, 1);
+  stroke-dasharray: 440px;
+  stroke-dashoffset: 80px;
+}
+
+.card:nth-child(1) svg circle:nth-child(2) {
+  stroke-dashoffset: calc(440px - (440px * 90) / 100);
+}
+.card:nth-child(2) svg circle:nth-child(2) {
+  stroke-dashoffset: calc(440px - (440px * 82) / 100);
+}
+.card:nth-child(3) svg circle:nth-child(2) {
+  stroke-dashoffset: calc(440px - (440 * 60) / 100);
+}
+
 .text {
   position: absolute;
   color: #fff;
@@ -96,11 +124,22 @@ svg {
   letter-spacing: 1px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   transition: bottom 0.5s, z-index 0.5s, transform 0.5s, padding 0.5s;
-  transition-delay: 0s,0.5s 0.5s,0s;
+  transition-delay: 0.5s, 0.5s 0.5s, 0.5s;
 }
 .card:hover .text {
-  bottom: -50px;
+  transition-delay: 0s, 0.5s, 0.5s, 0s;
+  bottom: -60px;
   z-index: 11;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-95%);
   padding: 10px 20px 10px;
+}
+
+.card:nth-child(1) .text {
+  background-color: #ff0461;
+}
+.card:nth-child(2) .text {
+  background-color: #2bd2ff;
+}
+.card:nth-child(3) .text {
+  background-color: #18d539;
 }
